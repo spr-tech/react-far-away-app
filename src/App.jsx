@@ -7,47 +7,36 @@ import DisplayItems from "./components/DisplayItems";
 import Footer from "./Footer";
 
 function App() {
-  const [items, setItems] = useState([
-    {
-      id: nanoid(),
-      quantity: 1,
-      item: "Passports",
-      checked: false,
-    },
-    {
-      id: nanoid(),
-      quantity: 1,
-      item: "Toothbrush",
-      checked: false,
-    },
-    {
-      id: nanoid(),
-      quantity: 1,
-      item: "Socks",
-      checked: false,
-    },
-    {
-      id: nanoid(),
-      quantity: 1,
-      item: "Charger",
-      checked: false,
-    },
-  ]);
-
+  const [items, setItems] = useState(
+    JSON.parse(localStorage.getItem("travelItems") || []),
+  );
   const [newItem, setNewItem] = useState("");
   const [quantity, setQuantity] = useState();
   const [order, setOrder] = useState("input");
 
+  const handleSetAndSave = (savedItems) => {
+    localStorage.setItem("travelItems", JSON.stringify(savedItems));
+    setItems(savedItems);
+  };
+
   const handleClick = (id) => {
-    setItems((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, checked: !item.checked } : item,
-      ),
+    const checkedItems = items.map((item) =>
+      item.id === id ? { ...item, checked: !item.checked } : item,
     );
+    handleSetAndSave(checkedItems);
+
+    // setItems((prev) =>
+    //   prev.map((item) =>
+    //     item.id === id ? { ...item, checked: !item.checked } : item,
+    //   ),
+    // );
   };
 
   const handleDelete = (id) => {
-    setItems((prev) => prev.filter((item) => item.id !== id));
+    const returnedItems = items.filter((item) => item.id !== id);
+    handleSetAndSave(returnedItems);
+
+    // setItems((prev) => prev.filter((item) => item.id !== id));
   };
 
   const handleAddItems = (quant, itm) => {
@@ -57,7 +46,11 @@ function App() {
       item: itm,
       checked: false,
     };
-    setItems((prev) => [...prev, newItem]);
+
+    const existingItems = [...items, newItem];
+
+    handleSetAndSave(existingItems);
+    // setItems((prev) => [...prev, newItem]);
   };
 
   const handleSubmit = (e) => {
