@@ -50,7 +50,7 @@ function App() {
     const existingItems = [...items, newItem];
 
     handleSetAndSave(existingItems);
-    setItems((prev) => [...prev, newItem]);
+    // setItems((prev) => [...prev, newItem]);
   };
 
   const handleSubmit = (e) => {
