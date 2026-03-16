@@ -1,16 +1,37 @@
-# React + Vite
+# Far Away App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a small React project I built to practice working with state, props, forms, and local storage.
 
-Currently, two official plugins are available:
+The app helps you keep track of items to pack for your trips. You can add an item with a quantity, mark it as packed/unpacked, delete items, and reset the list if needed. Everything is saved in local storage so your packing list stays even after refreshing the page.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Why I built it
 
-## React Compiler
+I made this project to get better at React by building something practical instead of only following theory. I wanted to practice how data moves between components and how user actions can update the UI.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# What the app can do
 
-## Expanding the ESLint configuration
+Add a new item with a quantity
+Mark items as packed/unpacked
+Delete individual items
+Reset the entire packing list
+Keep data in local storage even after refreshing the page
+Sort and organize your packing order
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# What I learned from this project
+
+While building this app, I practiced:
+Working with React state
+Passing props between components
+Handling form inputs
+Updating arrays in state
+Conditional rendering
+Storing and reading data from local storage
+Breaking the UI into smaller reusable components
+
+# Components in the app
+
+The project is split into different components to keep things organized:
+Logo – shows the app logo/header
+FormSec – handles adding new items
+DisplayItems – shows the packing list with check and delete options
+Footer – shows list summary and controls like reset
