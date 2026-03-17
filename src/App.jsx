@@ -7,9 +7,22 @@ import DisplayItems from "./components/DisplayItems";
 import Footer from "./Footer";
 
 function App() {
-  const [items, setItems] = useState(
-    JSON.parse(localStorage.getItem("travelItems") || []),
-  );
+  const [items, setItems] = useState(() => {
+    try {
+      const saved = localStorage.getItem("travelItems");
+
+      if (!saved || saved === "undefined" || saved === "") {
+        return [];
+      }
+
+      return JSON.parse(saved);
+    } catch (error) {
+      console.error("Critical JSON Error:", error);
+      localStorage.removeItem("travelItems");
+      return [];
+    }
+  });
+
   const [newItem, setNewItem] = useState("");
   const [quantity, setQuantity] = useState();
   const [order, setOrder] = useState("input");
@@ -39,7 +52,7 @@ function App() {
     // setItems((prev) => prev.filter((item) => item.id !== id));
   };
 
-  const handleAddItems = (quant, itm) => {
+  const handleAddItems = (quant = 1, itm) => {
     const newItem = {
       id: nanoid(),
       quantity: quant,
