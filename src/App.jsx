@@ -48,11 +48,9 @@ function App() {
   const handleDelete = (id) => {
     const returnedItems = items.filter((item) => item.id !== id);
     handleSetAndSave(returnedItems);
-
-    // setItems((prev) => prev.filter((item) => item.id !== id));
   };
 
-  const handleAddItems = (quant = 1, itm) => {
+  const handleAddItems = (quant, itm) => {
     const newItem = {
       id: nanoid(),
       quantity: quant,
@@ -63,18 +61,17 @@ function App() {
     const existingItems = [...items, newItem];
 
     handleSetAndSave(existingItems);
-    // setItems((prev) => [...prev, newItem]);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!newItem.trim()) return;
     handleAddItems(quantity, newItem);
-    setNewItem(" ");
+    setNewItem("");
   };
 
   const resetAll = () => {
-    setItems([]);
+    handleSetAndSave([]);
   };
 
   return (
